@@ -14,12 +14,23 @@ const weather = (latitude,longitude,callback) => {
         } else if( body.error ) {
             callback(`Darksky returned an error: ${body.error}`)
         } else {
+            const { hourly } = body
+            const hourly_data = hourly.data
+            let min_temp = 3000
+            let max_temp = -274
+            for(let i = 0; i < hourly_data.length; i++) {
+                let t = hourly_data[i].temperature
+                if( t < min_temp ) { min_temp = t }
+                if( t > max_temp ) { max_temp = t }
+            }
             callback(undefined,{
                 latitude,
                 longitude,
                 summary:body.daily.data[0].summary,
                 current_temperature:body.currently.temperature,
-                percentage_chance_of_rain:Math.round(body.currently.precipProbability*100)
+                percentage_chance_of_rain:Math.round(body.currently.precipProbability*100),
+                max_temperature:max_temp,
+                min_temperature:min_temp
             })
         }
     })

@@ -12,7 +12,7 @@ const get_weather = (address,handler) => {
                 error_data: error
             },undefined)
         }
-        weather(latitude,longitude, (error,{ summary, current_temperature, percentage_chance_of_rain } = {}) => {
+        weather(latitude,longitude, (error,{ summary, current_temperature, percentage_chance_of_rain, max_temperature, min_temperature } = {}) => {
             if( error ) {
                 return handler({
                     error: "Error fetching weather data",
@@ -22,6 +22,7 @@ const get_weather = (address,handler) => {
             return handler(undefined,{
                 summary, current_temperature, percentage_chance_of_rain, 
                 location, latitude, longitude,
+                max_temperature, min_temperature,
                 text: `${summary} It is ${current_temperature}C out. There is a ${percentage_chance_of_rain}% chance of rain.`
             })
         })
