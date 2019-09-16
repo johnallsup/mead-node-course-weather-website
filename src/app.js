@@ -5,9 +5,8 @@ const hbs = require('hbs')
 
 const get_weather = require('./utils/get_weather')
 
-get_weather("Exeter")
-
 const app = express()
+const port = process.env.PORT || 3000
 
 // Define paths for Express config
 const public_dir = path.join(__dirname,"../public")
@@ -88,6 +87,7 @@ app.get('*',(req,res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log("Server started")
+// Start the app
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`)
 })
