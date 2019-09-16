@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
                     output_div.innerHTML = `Error: ${data.error_data}`
                     console.log("Error",data)
                 } else {
-                    output_div.innerHTML = data.text
+                    output_div.innerHTML = `${data.location}<br />${data.text}`
                     console.log("Success",data)
                 }
             })
